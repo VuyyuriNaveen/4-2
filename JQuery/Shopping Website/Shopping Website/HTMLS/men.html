@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Men's Wear</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+  /* Basic styling */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+  }
+  section {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .product {
+    width: 200px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 10px;
+  }
+  .product img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  .product h3 {
+    font-size: 16px;
+    margin: 0;
+  }
+  .product p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Men's Wear</h1>
+</header>
+
+<section id="products">
+  <!-- Products will be dynamically added here -->
+</section>
+
+<script>
+  // Sample product data (replace with your actual data)
+  var products = [
+    {
+      name: "T-Shirt",
+      price: "$20.00",
+      image: "./images/p-1.png",
+      link: "#"
+    },
+    {
+      name: "Jeans",
+      price: "$40.00",
+      image: "./images/feature_4.jpg",
+      link: "#"
+    },
+    {
+      name: "Sneakers",
+      price: "$50.00",
+      image: "https://via.placeholder.com/150",
+      link: "#"
+    }
+  ];
+
+  // Function to display products on the page
+  function displayProducts() {
+    var productsContainer = document.getElementById("products");
+
+    // Clear existing content
+    productsContainer.innerHTML = "";
+
+    // Add each product to the container
+    products.forEach(function(product) {
+      var productHTML = `
+        <div class="product">
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.price}</p>
+          <a href="${product.link}">View Details</a>
+        </div>
+      `;
+      productsContainer.innerHTML += productHTML;
+    });
+  }
+
+  // Call the function to display products when the page loads
+  window.onload = displayProducts;
+</script>
+
+</body>
+</html>

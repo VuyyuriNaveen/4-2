@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE-edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, intial-scale=1.0" name="viewport">
+    <title>Shopping Website</title>
+    <!-- stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <!-- lightslider -->
+    <link rel="stylesheet" type="text/css" href="css/lightslider.css"/>
+    <!-- jQuery -->
+    <script crossorigin="anonymous" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- lightslider -->
+    <script src="js/lightslider.js"></script>
+    <!-- font-awesome -->
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/c8e4d183c2.js"></script> 
+    <!-- custom script -->
+    <script src="js/script.js"></script>
+    <style>
+        /* Add your custom styles here */
+    </style>
+</head>
+<body>
+    <nav>
+        <!-- Navigation content here -->
+    </nav>
+    <!-- Search bar -->
+    <div class="search-bar">
+        <!-- Search bar content here -->
+    </div>
+    <!-- Login and Sign-up forms -->
+    <div class="form">
+        <!-- Login and Sign-up form content here -->
+    </div>
+    <!-- Full slider -->
+    <ul id="adaptive" class="cs-hidden">
+        <!-- Full slider content here -->
+    </ul>
+    <!-- Featured categories -->
+    <div class="feature-heading">
+        <!-- Featured categories content here -->
+    </div>
+    <ul id="autoWidth" class="cs-hidden">
+        <!-- Featured categories content here -->
+    </ul>
+    <!-- New arrival section -->
+    <section class="new-arrival">       
+        <!-- New arrival content here -->
+    </section>
+    <!-- Sale section -->
+    <section class="sale">
+        <!-- Sale content here -->
+    </section>
+    <!-- New arrival feature item -->
+    <section class="new-arrival">       
+        <!-- New arrival feature item content here -->
+    </section>    
+    <!-- Banner -->
+    <div class="banner-box f-slide-3">
+        <!-- Banner content here -->
+    </div> 
+    <!-- Services section -->
+    <section class="services">
+        <!-- Services content here -->
+    </section>
+    <!-- Footer -->
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+    <!-- Cart items -->
+    <div class="container my-3" id="cartItemsContainer">
+        <div class="d-flex py-3">
+            <h3>Total Price: $<span id="totalPrice">0.00</span></h3>
+            <h3>Total Items: <span id="totalItems">0</span></h3>
+            <a class="mx-3 btn btn-primary" href="cart-check-out">Check Out</a>
+        </div>
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="cartItems">
+                <!-- Cart items will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Script -->
+    <script type="text/javascript">
+        // Retrieve cart items from localStorage
+        var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        // Display cart items
+        function displayCartItems() {
+            var total = 0;
+            var totalItems = 0;
+            $('#cartItems').empty();
+            cartItems.forEach(function(item) {
+                var itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                totalItems += item.quantity;
+                $('#cartItems').append(`
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.category}</td>
+                        <td>${item.price}</td>
+                        <td>${item.quantity}</td>
+                        <td><button class="remove-item" data-id="${item.id}">Remove</button></td>
+                    </tr>
+                `);
+            });
+            $('#totalPrice').text(total.toFixed(2));
+            $('#totalItems').text(totalItems);
+        }
+
+        // Handle click event for remove button
+        $(document).on('click', '.remove-item', function() {
+            var id = $(this).data('id');
+            // Remove item from cartItems array
+            cartItems = cartItems.filter(item => item.id !== id);
+            // Update localStorage with updated cartItems
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            // Display updated cart items
+            displayCartItems();
+        });
+
+        // Initial display
+        displayCartItems();
+    </script>
+</body>
+</html>
